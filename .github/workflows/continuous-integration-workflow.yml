@@ -21,22 +21,22 @@ jobs:
 
     - name: Build the C#       # Name of step
       run: dotnet build        # Command to run
-
+  
     - name: Build the TypeScript code 1.      # Name of step
-      run:
-        working-directory: DotnetTemplate.Web
-      run: run npm install        # Command to run
+      working-directory: DotnetTemplate.Web
+      run:  npm install        # Command to run
 
     - name: Build the TypeScript code 2.      # Name of step
-      run:
-        working-directory: DotnetTemplate.Web
-      run: npm run build        # Command to run
+      working-directory: DotnetTemplate.Web
+      run:  npm run build        # Command to run
 
     - name: Run the C# Tests   # Name of step
       run: dotnet test         # Command to run
-  
+
     - name: run the TypeScript tests  # Name of step
+      working-directory: DotnetTemplate.Web
       run: npm t               # Command to run
       
     - name: un linting on the TypeScript code   # Name of step
+      working-directory: DotnetTemplate.Web
       run: npm run lint         # Command to run
