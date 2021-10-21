@@ -41,5 +41,17 @@ jobs:
       working-directory: DotnetTemplate.Web
       run: npm run lint         # Command to run
 
+
+#New for Module 8
+
+    - name: Login to Docker Hub   # Name of step
+      run: docker login --mattfo --dockerhub_pw         # dockerhub_pw is a secret Held in GitHub
+
+    - name: Build Docker   # Name of step
+      run: docker build -t mattfo/dotnettemplate         # Command to run
+
+    - name: Tag The Docker   # Name of step
+      run: docker tag module8 mattfo/dotnettemplate:module8dock         # Command to run
+
     - name: Publish to Docker Hub   # Name of step
       run: docker push mattfo/dotnettemplate:module8dock         # Publish to Dotnet  
