@@ -40,3 +40,6 @@ jobs:
     - name: un linting on the TypeScript code   # Name of step
       working-directory: DotnetTemplate.Web
       run: npm run lint         # Command to run
+
+    - name: Publish to Docker Hub   # Name of step
+      run: docker push mattfo/dotnettemplate:module8dock         # Publish to Dotnet  
