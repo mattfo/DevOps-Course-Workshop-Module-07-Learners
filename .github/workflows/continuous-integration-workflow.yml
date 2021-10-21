@@ -43,16 +43,18 @@ jobs:
 
 #New for Module 8
 
-    - name: Login to Docker Hub   # Name of step
-      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin 
+    #- name: Login to Docker Hub   # Name of step
+    #  run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin 
 
-    - name: Build Docker   # Name of step
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/dotnettemplate:dockerimage .   # Command to run
+    #- name: Build Docker   # Name of step
+    #  run: docker build -t ${{ secrets.DOCKER_USERNAME }}/dotnettemplate:dockerimage .   # Command to run
 
-    - name: Publish to Docker Hub   # Name of step
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/dotnettemplate:dockerimage        # Push to Docker Hub
+    #- name: Publish to Docker Hub   # Name of step
+    #  run: docker push ${{ secrets.DOCKER_USERNAME }}/dotnettemplate:dockerimage        # Push to Docker Hub
 
-deploy:
+# We only want to deploy when pushing to the main branch
+
+  deploy:
     name: Deploy
     runs-on: ubuntu-latest      # Sets the build environment a machine with the latest Ubuntu installed
     needs: build
@@ -66,8 +68,8 @@ deploy:
         run: |
           pwd
           ls
-          docker build --tag username/dotnettemplate:dockerimage .
-          docker push username/dotnettemplate:dockerimage
+          docker build --tag ${{ secrets.DOCKER_USERNAME }}/dotnettemplate:dockerimage .
+          docker push ${{ secrets.DOCKER_USERNAME }}/dotnettemplate:dockerimage
 
     - uses: akhileshns/heroku-deploy@v3.12.12
       with:
