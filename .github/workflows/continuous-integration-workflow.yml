@@ -49,10 +49,8 @@ jobs:
       run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin 
 
     - name: Build Docker   # Name of step
-      run: docker build -t mattfo/dotnettemplate         # Command to run
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/dotnettemplate:module8      # Command to run
 
-    - name: Tag The Docker   # Name of step
-      run: docker tag module8 mattfo/dotnettemplate:module8dock         # Command to run
 
     - name: Publish to Docker Hub   # Name of step
-      run: docker push mattfo/dotnettemplate:module8dock         # Publish to Dotnet  
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/dotnettemplate:module8dock         # Publish to Dotnet  
