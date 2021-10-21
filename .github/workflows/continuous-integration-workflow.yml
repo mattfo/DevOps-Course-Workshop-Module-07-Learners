@@ -51,3 +51,10 @@ jobs:
 
     - name: Publish to Docker Hub   # Name of step
       run: docker push ${{ secrets.DOCKER_USERNAME }}/dotnettemplate:dockerimage        # Push to Docker Hub
+
+    - uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "appdotnet8"
+        heroku_email: "rinsesound@gmail.com"
+        usedocker: true
